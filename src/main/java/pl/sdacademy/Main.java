@@ -10,6 +10,6 @@ public class Main {
     System.out.println("Hello world!");
     System.out.println("MT test");
 
-    int chujniagita = 9000;
+    int chujnia_gita = 9000;
   }
 }
