@@ -9,5 +9,7 @@ public class Main {
     System.out.println("Hello world!");
     System.out.println("Hello world!");
     System.out.println("MT test");
+
+    int chujniagita = 9000;
   }
 }
