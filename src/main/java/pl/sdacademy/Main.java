@@ -8,8 +8,6 @@ public class Main {
     System.out.println("Hello world!");
     System.out.println("Hello world!");
     System.out.println("Hello world!");
-    System.out.println("MT test");
-
-    int chujnia_gita = 9000;
+    System.out.println("BN 21:57");
   }
 }
