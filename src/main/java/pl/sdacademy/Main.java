@@ -1,9 +1,6 @@
 package pl.sdacademy;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import javax.persistence.EntityManager;
 
 import static pl.sdacademy.HibernateUtil.getSessionFactory;
 
