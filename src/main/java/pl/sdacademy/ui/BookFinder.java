@@ -31,7 +31,7 @@ public class BookFinder {
     }
 
     public void deleteBook() {
-        System.out.println("Type book title for delete:");
+        System.out.println("Type in book title for delete:");
         Scanner scanner = new Scanner(System.in);
         String titleToDelete = scanner.nextLine();
         EntityManager entityManager = HibernateUtil.getSessionFactory().createEntityManager();
@@ -46,16 +46,17 @@ public class BookFinder {
 
     public String bookIsbnChecker() {
         String bookISBN;
-        System.out.println("Please type book ISBN number (13 digits):");
-        Scanner scanner = new Scanner(System.in);
-        bookISBN = scanner.nextLine();
+        do {
+            Scanner scanner = new Scanner(System.in);
+            bookISBN = scanner.nextLine();
+                if (bookISBN.matches("[0-9]{13}")) {
+                    System.out.println("Number is correct");
+                }
+                else {
+                    System.out.println("Number is wrong, please write correct number using 13 digits only");
+                 }
+        } while (!bookISBN.matches("[0-9]{13}"));
 
-        if (bookISBN.matches("[0-9]{13}")) {
-            System.out.println("Number is correct");
-        }
-        else {
-            System.out.println("Number is wrong, please write correct number using 13 digits only");
-        }
         return bookISBN;
     }
 
@@ -64,9 +65,11 @@ public class BookFinder {
         Scanner scanner = new Scanner(System.in);
         String book_title = scanner.nextLine();
 
-        bookIsbnChecker();
+        System.out.println("Please type book ISBN number (13 digits):");
+        String bookISBN = bookIsbnChecker();
 
-        System.out.println("Type in pubisher name");
+
+        System.out.println("Type in publisher name");
         String book_publisher = scanner.nextLine();
         Publisher publisher = new Publisher(book_publisher);
 
@@ -80,7 +83,6 @@ public class BookFinder {
 
         entityManager.getTransaction().begin();
         entityManager.persist(publisher);
-
         entityManager.persist(book);
         entityManager.getTransaction().commit();
 

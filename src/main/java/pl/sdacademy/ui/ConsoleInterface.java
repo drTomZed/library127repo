@@ -24,7 +24,6 @@ public class ConsoleInterface {
             System.out.println(welcomeText);
             String userSelection = scanner.nextLine();
             Pattern templateRegexOneDigitSelection = Pattern.compile("\\d{1}");
-            Pattern templateRegexWordsOnly = Pattern.compile("[a-zA-Z]");
             String text;
             Matcher matcher = templateRegexOneDigitSelection.matcher(userSelection);
                 if (matcher.matches()) {
@@ -46,7 +45,7 @@ public class ConsoleInterface {
                     System.out.println("Data what you type in is not correct");
                 }
 
-            System.out.println("Czy kontynuować? yes - tak, no - nie, zamknij program");
+            System.out.println("Do you want ? yes - tak, no - nie, zamknij program");
             continueOption = skaner.nextLine();
 
         } while (continueOption.equals("yes"));
