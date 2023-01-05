@@ -8,24 +8,25 @@ import java.util.regex.Pattern;
 
 public class ConsoleInterface {
 
-    public void chooseOption() {
+    public void userUI() {
 
 
         Scanner scanner = new Scanner(System.in);
-        String greetings = "Welcome in our best dupa Libray. Type number of acction what you want to do:  \n" +
+        String welcomeText = "Welcome in our best dupa Libray. Type number of action what you want to do:  \n" +
                 "1 - Check is there a book in the system \n" +
                 "2 - Delete book using title \n" +
                 "3 - adding new book";
 
         Scanner skaner = new Scanner(System.in);
-        String czyKontynuowac = "yes";
+        String continueOption = "yes";
 
         do {
-            System.out.println(greetings);
+            System.out.println(welcomeText);
             String userSelection = scanner.nextLine();
-            Pattern templateRegex = Pattern.compile("\\d+");
-
-            Matcher matcher = templateRegex.matcher(userSelection);
+            Pattern templateRegexOneDigitSelection = Pattern.compile("\\d{1}");
+            Pattern templateRegexWordsOnly = Pattern.compile("[a-zA-Z]");
+            String text;
+            Matcher matcher = templateRegexOneDigitSelection.matcher(userSelection);
                 if (matcher.matches()) {
 
                     int number = Integer.valueOf(userSelection);
@@ -46,9 +47,9 @@ public class ConsoleInterface {
                 }
 
             System.out.println("Czy kontynuować? yes - tak, no - nie, zamknij program");
-            czyKontynuowac = skaner.nextLine();
+            continueOption = skaner.nextLine();
 
-        } while (czyKontynuowac.equals("yes"));
+        } while (continueOption.equals("yes"));
         System.out.println("Koniec programu!!!");
         HibernateUtil.shutdown();
 
