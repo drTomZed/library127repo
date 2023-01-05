@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookFinder {
+
     public void isBookExists() {
 
         System.out.println("Type the title of the boook: ");
@@ -30,7 +31,7 @@ public class BookFinder {
     }
 
     public void deleteBook() {
-        System.out.println("Type book title for delete:");
+        System.out.println("Type in book title for delete:");
         Scanner scanner = new Scanner(System.in);
         String titleToDelete = scanner.nextLine();
         EntityManager entityManager = HibernateUtil.getSessionFactory().createEntityManager();
@@ -43,35 +44,46 @@ public class BookFinder {
 
     }
 
+    public String bookIsbnChecker() {
+        String bookISBN;
+        do {
+            Scanner scanner = new Scanner(System.in);
+            bookISBN = scanner.nextLine();
+                if (bookISBN.matches("[0-9]{13}")) {
+                    System.out.println("Number is correct");
+                }
+                else {
+                    System.out.println("Number is wrong, please write correct number using 13 digits only");
+                 }
+        } while (!bookISBN.matches("[0-9]{13}"));
+
+        return bookISBN;
+    }
+
     public void addBook() {
-        System.out.println("Type book title:");
+        System.out.println("Type in book title:");
         Scanner scanner = new Scanner(System.in);
         String book_title = scanner.nextLine();
 
-        System.out.println("Type book ISBN:");
-        String book_ISBN = scanner.nextLine();
+        System.out.println("Please type book ISBN number (13 digits):");
+        String bookISBN = bookIsbnChecker();
 
-        System.out.println("Type pubisher");
+
+        System.out.println("Type in publisher name");
         String book_publisher = scanner.nextLine();
         Publisher publisher = new Publisher(book_publisher);
-
 
 
         EntityManager entityManager = HibernateUtil.getSessionFactory().createEntityManager();
 
         Book book = new Book();
         book.setTitle(book_title);
-        book.setISBN(book_ISBN);
+        book.setISBN(bookISBN);
         book.setPublisher(publisher);
 
         entityManager.getTransaction().begin();
         entityManager.persist(publisher);
-
         entityManager.persist(book);
-//        Book result = entityManager.find(Book.class, 1);
-//        System.out.println(result.getTitle() + " " + result.getTitle());
-
-
         entityManager.getTransaction().commit();
 
     }
